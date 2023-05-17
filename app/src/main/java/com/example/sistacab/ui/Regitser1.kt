@@ -27,46 +27,64 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.sistacab.MainActivity
-import com.example.sistacab.ui.theme.SistaCabTheme
+import com.example.sistacab.R
+import com.example.sistacab.Register
+import com.example.sistacab.ui.ui.theme.SistaCabTheme
 
-class SignUp : ComponentActivity() {
+class Register1 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            SistaCabTheme() {
-
+            SistaCabTheme {
+                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Sign()
+                    LoginDriver()
                 }
             }
         }
-    }}
+    }
+}
+
 
 @Composable
-fun Sign(){
+fun LoginDriver() {
     val mContext = LocalContext.current
     val focus = LocalFocusManager.current
+
     Column {
-        Column(
+        Row(
             Modifier
                 .background(Color(230, 206, 85))
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(1.dp, 5.dp, 50.dp, 5.dp),
 
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+
         ) {
             Image(
-                painter = painterResource(id = com.example.sistacab.R.drawable.logo),
+                painter = painterResource(id = R.drawable.sistacab),
                 contentDescription = "None",
                 modifier = Modifier
-                    .size(220.dp),
+                    .size(150.dp, 100.dp),
                 contentScale = ContentScale.Inside,
 
 
                 )
+            Text(
+                text = "Register As Driver",
+                fontSize = 35.sp,
+
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(5.dp, 6.dp, 10.dp, 6.dp),
+
+                )
+
         }
 
         Column(
@@ -106,6 +124,7 @@ fun Sign(){
                     71,
                     255
                 )),
+
                 keyboardActions = KeyboardActions(onNext = { focus.moveFocus(FocusDirection.Down) })
             )
 
@@ -126,12 +145,13 @@ fun Sign(){
                 value = email,
                 onValueChange = { email = it },
                 singleLine = true,
-                label = { Text(text = "abc@ex.com") },
+                label = { Text(text = "abc@example.com") },
                 placeholder = { Text(text = "Enter Your Email") },
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Ascii,
                     imeAction = ImeAction.Next
-                ),colors = TextFieldDefaults.textFieldColors(backgroundColor = Color(
+                ),
+                colors = TextFieldDefaults.textFieldColors(backgroundColor = Color(
                     71,
                     71,
                     71,
@@ -162,7 +182,8 @@ fun Sign(){
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Ascii,
                     imeAction = ImeAction.Next
-                ),colors = TextFieldDefaults.textFieldColors(backgroundColor = Color(
+                ),
+                colors = TextFieldDefaults.textFieldColors(backgroundColor = Color(
                     71,
                     71,
                     71,
@@ -194,7 +215,8 @@ fun Sign(){
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,
                     imeAction = ImeAction.Done
-                ),colors = TextFieldDefaults.textFieldColors(backgroundColor = Color(
+                ),
+                colors = TextFieldDefaults.textFieldColors(backgroundColor = Color(
                     71,
                     71,
                     71,
@@ -203,9 +225,51 @@ fun Sign(){
                 keyboardActions = KeyboardActions(onDone = { focus.clearFocus(true) })
             )
 
+            Text(
+                text = "Document",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(56.dp, 6.dp, 6.dp, 6.dp),
 
-            Spacer(modifier = Modifier.size(20.dp))
 
+                )
+            var doc by remember {
+                mutableStateOf("")
+            }
+            TextField(
+                value = doc,
+                singleLine = true,
+                onValueChange = { doc = it },
+                label = { Text(text = "Upload your Driving Licence") },
+                placeholder = { Text(text = "Enter Your Password") },
+                visualTransformation = PasswordVisualTransformation(),
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done
+                ),
+                colors = TextFieldDefaults.textFieldColors(backgroundColor = Color(
+                    71,
+                    71,
+                    71,
+                    255
+                )),
+                keyboardActions = KeyboardActions(onDone = { focus.clearFocus(true) })
+            )
+
+            Spacer(modifier = Modifier.size(10.dp))
+
+            Text(
+                text = "Term And Condition",
+                color = Color.Black,
+                textAlign = TextAlign.Center,
+                fontSize = 18.sp,
+                modifier = Modifier
+                    .size(200.dp, 30.dp)
+                    .padding(4.dp),
+            )
+            Spacer(modifier = Modifier.size(10.dp))
 
             Button(
                 onClick = { mContext.startActivity(Intent(mContext, HomePage::class.java)) },
@@ -217,17 +281,14 @@ fun Sign(){
                     textAlign = TextAlign.Center,
                     fontSize = 18.sp,
                     modifier = Modifier
-                        .size(100.dp, 35.dp)
-                        .padding(4.dp),
+                        .size(100.dp, 30.dp)
+                        .padding(2.dp),
                 )
             }
 
             TextButton(onClick = {
-                print("Working")
                 mContext.startActivity(Intent(mContext, MainActivity::class.java))
-            }
-
-            ) {
+            }) {
                 Text(
                     text = "Already Registered? Login here",
                     fontSize = 18.sp,
@@ -235,6 +296,5 @@ fun Sign(){
             }
         }
     }
-
-
 }
+

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -96,7 +97,14 @@ fun Login() {
                         label = {Text( text="Your Name")},
                         placeholder = { Text(text = "Enter Your Name")},
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Ascii,imeAction = ImeAction.Next),
-                        keyboardActions = KeyboardActions (onNext ={ focus.moveFocus(FocusDirection.Down)} )
+                        keyboardActions = KeyboardActions (onNext ={ focus.moveFocus(FocusDirection.Down)} ),
+                        colors = TextFieldDefaults.textFieldColors(backgroundColor = Color(
+                            116,
+                            115,
+                            115,
+                            255
+                        )
+                        )
                     )
                     Text(
                         text = "Password",
@@ -120,16 +128,24 @@ fun Login() {
                         placeholder = { Text(text = "Enter Your Password")},
                         visualTransformation = PasswordVisualTransformation(),
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password,imeAction = ImeAction.Done),
-                        keyboardActions = KeyboardActions (onDone={focus.clearFocus(true)} )
+                        keyboardActions = KeyboardActions (onDone={focus.clearFocus(true)}),
+                        colors = TextFieldDefaults.textFieldColors(backgroundColor = Color(
+                            116,
+                            115,
+                            115,
+                            255
+                        )
+                        )
                     )
-                    TextButton(onClick = {print("Working") }) {
+                    TextButton(onClick = {mContext.startActivity(Intent(mContext, ForgotPassword::class.java))}) {
                         Text(
                             text = "Forgot Password?",
                             fontSize = 18.sp,
                             textAlign = TextAlign.Right,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(4.dp, 4.dp, 40.dp, 4.dp),
+                                .padding(4.dp, 4.dp, 40.dp, 4.dp)
+                                ,
                         )
                     }
 
