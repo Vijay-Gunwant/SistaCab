@@ -1,5 +1,6 @@
 package com.example.sistacab.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -27,12 +29,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.sistacab.MainActivity
 import com.example.sistacab.R
 
 class SignUp : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val mContext = LocalContext.current
             val focus = LocalFocusManager.current
             Column {
                 Column(
@@ -186,7 +190,7 @@ class SignUp : ComponentActivity() {
 
                     TextButton(onClick = {
                         print("Working")
-
+                        mContext.startActivity(Intent(mContext, MainActivity::class.java))
                     }
 
                     ) {
